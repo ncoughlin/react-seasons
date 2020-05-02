@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import LatLongCard from "./LatLongCard";
 
 class App extends React.Component {
   // javascript class that initializes state
@@ -22,44 +23,32 @@ class App extends React.Component {
     );
   }
 
+
   // react requires us to define render
   render() {
+    // if there is an error message and no position data
     if (this.state.errorMessage && !this.state.lat) {
       return (
-      <div className="ui container">
-      <div className="ui card">
-        <div className="content">
-          <div className="header">Current Position:</div>
+        <LatLongCard>
           <div className="description">Error: {this.state.errorMessage}</div>
-        </div>
-      </div>
-      </div>
-      )
-      
-    } else if (!this.state.errorMessage && this.state.lat){
-        return (
-        <div className="ui container">
-        <div className="ui card">
-          <div className="content">
-            <div className="header">Current Position:</div>
-              <div className="description">Latitude: {this.state.lat}</div>
-              <div className="description">Longitude: {this.state.long}</div>
-          </div>
-        </div>
-      </div>
-      )
-        
+        </LatLongCard>
+      );
+      // if there is no error message and there IS position data
+    } else if (!this.state.errorMessage && this.state.lat) {
+      return (
+        <LatLongCard>
+          <div className="description">Latitude: {this.state.lat}</div>
+          <div className="description">Longitude: {this.state.long}</div>
+        </LatLongCard>
+      );
+      // if no error message and no position data
     } else {
-        return (
-        <div className="ui container">
-        <div className="ui card">
-          <div className="content">
-            <div className="header">Current Position:</div>
-            <div className="description">Loading Location...</div>
-          </div>
-        </div>
-      </div>
-      )
+      return (
+        <LatLongCard>
+          <div className="header">Current Position:</div>
+          <div className="description">Loading Location...</div>
+        </LatLongCard>
+      );
     }
   }
 }
