@@ -6,7 +6,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { lat: null, long: null };
+    this.state = { lat: null, long: null, errorMessage: "" };
 
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -16,23 +16,51 @@ class App extends React.Component {
           long: position.coords.longitude,
         });
       },
-      (err) => console.log(err)
+      (err) => {
+        this.setState({ errorMessage: err.message });
+      }
     );
   }
 
   // react requires us to define render
   render() {
-    return (
+    if (this.state.errorMessage && !this.state.lat) {
+      return (
       <div className="ui container">
+      <div className="ui card">
+        <div className="content">
+          <div className="header">Current Position:</div>
+          <div className="description">Error: {this.state.errorMessage}</div>
+        </div>
+      </div>
+      </div>
+      )
+      
+    } else if (!this.state.errorMessage && this.state.lat){
+        return (
+        <div className="ui container">
         <div className="ui card">
           <div className="content">
             <div className="header">Current Position:</div>
-            <div className="description">Latitude: {this.state.lat}</div>
-            <div className="description">Longitude: {this.state.long}</div>
+              <div className="description">Latitude: {this.state.lat}</div>
+              <div className="description">Longitude: {this.state.long}</div>
           </div>
         </div>
       </div>
-    );
+      )
+        
+    } else {
+        return (
+        <div className="ui container">
+        <div className="ui card">
+          <div className="content">
+            <div className="header">Current Position:</div>
+            <div className="description">Loading Location...</div>
+          </div>
+        </div>
+      </div>
+      )
+    }
   }
 }
 
