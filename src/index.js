@@ -8,21 +8,20 @@ class App extends React.Component {
     super(props);
 
     this.state = { lat: null, long: null, errorMessage: "" };
+  }
 
+  componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
-      (position) => {
-        // we called setstate!
+      (position) =>
         this.setState({
           lat: position.coords.latitude,
           long: position.coords.longitude,
-        });
-      },
+        }),
       (err) => {
         this.setState({ errorMessage: err.message });
       }
     );
   }
-
 
   // react requires us to define render
   render() {
@@ -45,7 +44,6 @@ class App extends React.Component {
     } else {
       return (
         <LatLongCard>
-          <div className="header">Current Position:</div>
           <div className="description">Loading Location...</div>
         </LatLongCard>
       );
