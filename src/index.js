@@ -3,12 +3,9 @@ import ReactDOM from "react-dom";
 import LatLongCard from "./LatLongCard";
 
 class App extends React.Component {
-  // javascript class that initializes state
-  constructor(props) {
-    super(props);
 
-    this.state = { lat: null, long: null, errorMessage: "" };
-  }
+  // initialize state
+  state = { lat: null, long: null, errorMessage: "" };
 
   componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
