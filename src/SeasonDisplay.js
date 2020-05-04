@@ -1,4 +1,16 @@
+import './SeasonDisplay.css';
 import React from "react";
+
+const seasonConfig = {
+  summer: {
+    text: "It is summer.",
+    emoji: "🌞",
+  },
+  winter: {
+    text: "It is Winter.",
+    emoji: "❄️",
+  },
+};
 
 // depending on the month and latitude determine if it is summer or winter
 const getSeason = (lat, month) => {
@@ -11,8 +23,16 @@ const getSeason = (lat, month) => {
 
 const SeasonDisplay = (props) => {
   const season = getSeason(props.lat, new Date().getMonth());
-  const seasonIcon = season === 'winter' ? '❄️':'🌞';
-  return <div> Season:{seasonIcon} </div>;
+
+  // deconstruct seasonConfig object
+  const{text, emoji} = seasonConfig[season]; 
+
+  return (
+    <div>
+      <div> Icon: {emoji} </div>
+      <div> Text: {text} </div>
+    </div>
+  );
 };
 
 export default SeasonDisplay;

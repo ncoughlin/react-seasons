@@ -7,6 +7,7 @@ class App extends React.Component {
   // initialize state
   state = { lat: null, long: null, errorMessage: "" };
 
+
   componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
       (position) =>
@@ -22,6 +23,7 @@ class App extends React.Component {
 
   // react requires us to define render
   render() {
+
     // if there is an error message and no position data
     if (this.state.errorMessage && !this.state.lat) {
       return (
