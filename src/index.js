@@ -42,7 +42,7 @@ class App extends React.Component {
       );
       // if no error message and no position data
     } else {
-      return <Loading />;
+      return <Loading message='fetching location data' />;
     }
   }
 }
