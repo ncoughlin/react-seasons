@@ -28,7 +28,7 @@ const SeasonDisplay = (props) => {
   const{text, emoji} = seasonConfig[season]; 
 
   return (
-    <div>
+    <div className={`season-display ${season}`}>
       <div> Icon: {emoji} </div>
       <div> Text: {text} </div>
     </div>

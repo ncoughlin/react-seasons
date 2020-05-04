@@ -2,11 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import LatLongCard from "./LatLongCard";
 import SeasonDisplay from "./SeasonDisplay";
+import Loading from "./Loading";
+import "./style.css";
 
 class App extends React.Component {
   // initialize state
   state = { lat: null, long: null, errorMessage: "" };
-
 
   componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
@@ -23,7 +24,6 @@ class App extends React.Component {
 
   // react requires us to define render
   render() {
-
     // if there is an error message and no position data
     if (this.state.errorMessage && !this.state.lat) {
       return (
@@ -42,11 +42,7 @@ class App extends React.Component {
       );
       // if no error message and no position data
     } else {
-      return (
-        <LatLongCard>
-          <div className="description">Loading Location...</div>
-        </LatLongCard>
-      );
+      return <Loading />;
     }
   }
 }
