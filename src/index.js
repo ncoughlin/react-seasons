@@ -22,8 +22,7 @@ class App extends React.Component {
     );
   }
 
-  // react requires us to define render
-  render() {
+  renderWeatherWidget() {
     // if there is an error message and no position data
     if (this.state.errorMessage && !this.state.lat) {
       return (
@@ -42,8 +41,17 @@ class App extends React.Component {
       );
       // if no error message and no position data
     } else {
-      return <Loading message='fetching location data' />;
+      return <Loading message="fetching location data" />;
     }
+  }
+
+  render() {
+    return (
+      <div className='red-border'>
+        {this.renderWeatherWidget()}
+      </div>
+    );
+    
   }
 }
 
